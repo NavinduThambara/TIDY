@@ -24,7 +24,7 @@
                 android:layout_weight="200"
                 android:fontFamily="@font/poppins"
                 android:text="Note Title"
-                android:textColor="@color/red"
+                android:textColor="@color/blue"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
                 android:text="Description"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
-                android:textColor="@color/pink"/>
+                android:textColor="@color/black"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

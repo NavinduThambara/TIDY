@@ -1,7 +1,14 @@
-package com.example.tidy.model
+package com.example.tidy.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import com.example.tidy.model.Task
+
 
 @Dao
 interface TaskDao {
@@ -14,9 +21,10 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(task: Task)
 
-    @Query("SELECT * FROM tasks")
+    @Query("SELECT * FROM tasks ORDER BY id DESC")
     fun getAllTasks(): LiveData<List<Task>>
 
-    @Query("DELETE FROM tasks")
-    suspend fun clearAllTasks()
+    @Query("SELECT * FROM tasks WHERE title LIKE :query OR description LIKE :query")
+    fun searchTask(query: String?): LiveData<List<Task>>
+
 }

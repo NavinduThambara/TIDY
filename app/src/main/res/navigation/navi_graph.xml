@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
     <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.example.tidy.fragments.AddNoteFragment"
+        android:label="AddItemFragment" >
+        <action
+            android:id="@+id/action_addItemFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editItemFragment"
+        android:name="com.example.tidy.fragments.EditNoteFragment"
+        android:label="EditItemFragment" >
+        <action
+            android:id="@+id/action_editItemFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="Task"
+            app:argType="com.example.tidy.model.Task"
+            app:nullable="true"
+            />
+    </fragment>
+    <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.tidy.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_addNoteFragment"
-            app:destination="@id/addNoteFragment" />
+            android:id="@+id/action_homeFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_editNoteFragment"
-            app:destination="@id/editNoteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/addNoteFragment"
-        android:name="com.example.tidy.fragments.AddNoteFragment"
-        android:label="fragment_add_note"
-        tools:layout="@layout/fragment_add_note" >
-        <action
-            android:id="@+id/action_addNoteFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editNoteFragment"
-        android:name="com.example.tidy.fragments.EditNoteFragment"
-        android:label="fragment_edit_note"
-        tools:layout="@layout/fragment_edit_note" >
-        <action
-            android:id="@+id/action_editNoteFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-
+            android:id="@+id/action_homeFragment_to_editItemFragment"
+            app:destination="@id/editItemFragment" />
     </fragment>
 </navigation>
