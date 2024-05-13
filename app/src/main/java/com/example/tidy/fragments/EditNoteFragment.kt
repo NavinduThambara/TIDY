@@ -15,6 +15,7 @@ import com.example.tidy.R
 import com.example.tidy.databinding.FragmentEditNoteBinding
 import com.example.tidy.model.Task
 import com.example.tidy.viewmodel.TaskViewModel
+import java.util.Calendar
 
 class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
 
@@ -43,24 +44,66 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
 
         taskViewModel = (activity as MainActivity).taskViewModel
         currentTask = args.task!!
-
+        val calendarDate = Calendar.getInstance().apply { timeInMillis = currentTask.date }
+        val calendarTime = Calendar.getInstance().apply { timeInMillis = currentTask.time }
         // Set up initial view with the current task
         binding.editNoteTitle.setText(currentTask.title)
         binding.editNoteDesc.setText(currentTask.description)
+// Set the date and time in the DatePicker
+        binding.datePickerEdit.init(
+            calendarDate.get(Calendar.YEAR),
+            calendarDate.get(Calendar.MONTH),
+            calendarDate.get(Calendar.DAY_OF_MONTH)
+        ) { _, year, monthOfYear, dayOfMonth ->
+            // Handle date change if necessary
+        }
 
+        // Set the time in the TimePicker
+        binding.timePickerEdit.hour = calendarTime.get(Calendar.HOUR_OF_DAY)
+        binding.timePickerEdit.minute = calendarTime.get(Calendar.MINUTE)
         // Handle save button click
         binding.editNoteFab.setOnClickListener {
             val title = binding.editNoteTitle.text.toString().trim()
             val description = binding.editNoteDesc.text.toString().trim()
+            val date = getDateOnly()
+            val time = getTimeOnly()
 
             if (title.isNotEmpty()) {
-                val task = Task(currentTask.id, title, description)
+                val task = Task(currentTask.id, title, description , date, time)
                 taskViewModel.updateTask(task)
                 view.findNavController().popBackStack(R.id.homeFragment, false)
             } else {
                 Toast.makeText(context, "Title cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun getTimeOnly(): Long {
+        val minute = binding.timePickerEdit.minute
+        val hour = binding.timePickerEdit.hour
+
+        val calendar = Calendar.getInstance()
+        // Set other fields to current values to avoid exceptions
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR))
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH))
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH))
+        // Set time
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        return calendar.timeInMillis
+    }
+
+
+    private fun getDateOnly(): Long {
+        val day = binding.datePickerEdit.dayOfMonth
+        val month = binding.datePickerEdit.month
+        val year = binding.datePickerEdit.year
+
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+
+        return calendar.timeInMillis
     }
 
     private fun deleteTask() {

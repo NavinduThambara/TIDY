@@ -15,9 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_thin"
+            android:fontFamily="@font/poppins"
             android:text="Edit Note."
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -32,16 +32,16 @@
             android:background="@drawable/field_border"
             android:layout_marginTop="16dp"
             android:maxLines="1"
-            android:fontFamily="@font/poppins_thin"/>
+            android:fontFamily="@font/poppins"/>
 
         <EditText
             android:id="@+id/editNoteDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:layout_below="@id/editNoteTitle"
             android:layout_marginTop="12dp"
             android:background="@drawable/field_border"
-            android:fontFamily="@font/poppins_thin"
+            android:fontFamily="@font/poppins"
             android:gravity="top"
             android:hint="Enter the description"
             android:padding="12dp"
@@ -60,6 +60,40 @@
             android:contentDescription="editFab"
             android:src="@drawable/baseline_done_24"
             android:tintMode="@color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/editNoteDesc"
+            android:layout_marginTop="20dp">
+
+            <DatePicker
+                android:id="@+id/datePickerEdit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_gravity="center"
+                android:scaleY="0.7"
+                android:scaleX="0.7"
+                android:layout_marginLeft="-30dp"
+                android:layout_marginRight="-30dp"/>
+
+            <TimePicker
+                android:id="@+id/timePickerEdit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_gravity="center"
+                android:scaleY="0.7"
+                android:scaleX="0.7"
+                android:layout_marginLeft="-30dp"
+                android:layout_marginRight="-30dp"/>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 </layout>

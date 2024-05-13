@@ -38,7 +38,27 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timePicker"
+                android:layout_marginTop="8dp"
+                android:maxHeight="170dp"
+                android:text="Description"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"/>
 
+            <TextView
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins"
+                android:maxHeight="170dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

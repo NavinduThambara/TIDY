@@ -81,12 +81,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
     }
 
-    private fun searchTask(query: String?){
-        val searchQuery = "%$query"
-        taskViewModel.searchTask(searchQuery).observe(this) { list ->
+    private fun searchTask(query: String?) {
+        val searchQuery = "%$query%"
+        taskViewModel.searchTask(searchQuery).observe(viewLifecycleOwner) { list ->
             taskAdapter.differ.submitList(list)
         }
     }
+
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false

@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase
 import com.example.tidy.model.Task
 
 
-@Database(entities = [Task::class], version = 1)
+@Database(entities = [Task::class], version = 3)
 abstract class TaskDatabase: RoomDatabase() {
     abstract fun getTaskDao(): TaskDao
 
@@ -31,6 +31,6 @@ abstract class TaskDatabase: RoomDatabase() {
                 context.applicationContext,
                 TaskDatabase::class.java,
                 "task_db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
     }
 }
